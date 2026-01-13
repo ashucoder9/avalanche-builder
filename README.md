@@ -70,7 +70,7 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 ### L1/Subnet Creation
 - "Create a new Avalanche L1 with custom gas settings"
-- "Deploy my blockchain to Fuji testnet"
+- "Deploy my L1 to Fuji testnet"
 - "Add a validator to my L1"
 
 ### Cross-Chain Development
@@ -80,7 +80,7 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 ### Node Operations
 - "How do I run an AvalancheGo validator node?"
-- "Configure my node for an L1 subnet"
+- "Configure my node for an L1"
 - "Set up monitoring for my Avalanche node"
 
 ## Prerequisites
