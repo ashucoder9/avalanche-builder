@@ -10,19 +10,19 @@
 
 | Resource | URL | Description |
 |----------|-----|-------------|
-| Avalanche Builder Hub | https://build.avax.network | Primary developer documentation |
-| Avalanche Docs | https://docs.avax.network | General documentation |
-| Avalanche Academy | https://academy.avax.network | Interactive courses |
+| Avalanche Builder Hub | https://build.avax.network | Builders Hub |
+| Avalanche Docs | https://build.avax.network/docs | General documentation |
+| Avalanche Academy | https://build.avax.network/academy | Avalanche-focused Courses |
 | AvaCloud Docs | https://developers.avacloud.io | Managed infrastructure docs |
 
 ### API References
 
 | Resource | URL |
 |----------|-----|
-| C-Chain API | https://docs.avax.network/reference/avalanchego/c-chain/api |
-| P-Chain API | https://docs.avax.network/reference/avalanchego/p-chain/api |
-| X-Chain API | https://docs.avax.network/reference/avalanchego/x-chain/api |
-| Admin API | https://docs.avax.network/reference/avalanchego/admin-api |
+| C-Chain API | https://build.avax.network/docs/api-reference/c-chain/api |
+| P-Chain API | https://build.avax.network/docs/api-reference/p-chain/api |
+| X-Chain API | https://build.avax.network/docs/api-reference/x-chain/api |
+| Admin API | https://build.avax.network/docs/api-reference/admin-api |
 
 ---
 
@@ -125,9 +125,11 @@ npm install -D vitest @nomicfoundation/hardhat-toolbox
 
 | Network | Explorer | URL |
 |---------|----------|-----|
-| C-Chain Mainnet | Snowtrace | https://snowtrace.io |
-| C-Chain Fuji | Snowtrace Testnet | https://testnet.snowtrace.io |
-| Subnets | Subnet Explorer | https://subnets.avax.network |
+| C-Chain Mainnet | Avalanche Explorer | https://subnets.avax.network/c-chain |
+| C-Chain Fuji | Avalanche Explorer (Fuji) | https://subnets.avax.network/c-chain?network=fuji |
+| All L1s/Subnets | L1 Explorer | https://subnets.avax.network |
+| C-Chain (Third-party) | Snowscan | https://snowscan.xyz |
+| Multi-chain | Avascan | https://avascan.info |
 
 ---
 
@@ -163,10 +165,10 @@ npm install -D vitest @nomicfoundation/hardhat-toolbox
 
 ## Faucets
 
-| Network | Faucet URL |
-|---------|------------|
-| Fuji Testnet | https://faucet.avax.network |
-| Fuji AVAX (Chainlink) | https://faucets.chain.link/fuji |
+| Network | Faucet URL | Notes |
+|---------|------------|-------|
+| Builders Hub Faucet | https://build.avax.network | Sign up (free) and claim test tokens from the console faucet (recommended) |
+| Fuji AVAX (Chainlink) | https://faucets.chain.link/fuji | Alternative faucet |
 
 ---
 
@@ -243,17 +245,18 @@ npm install -D vitest @nomicfoundation/hardhat-toolbox
 
 | Course | URL |
 |--------|-----|
-| Avalanche Fundamentals | https://academy.avax.network/course/avalanche-fundamentals |
-| Interchain Messaging | https://academy.avax.network/course/interchain-messaging |
-| Interchain Token Transfer | https://academy.avax.network/course/interchain-token-transfer |
-| Customizing the EVM | https://academy.avax.network/course/customizing-evm |
+| Avalanche Fundamentals | https://build.avax.network/academy/avalanche-fundamentals |
+| Interchain Messaging | https://build.avax.network/academy/interchain-messaging |
+| Interchain Token Transfer | https://build.avax.network/academy/interchain-token-transfer |
+| Customizing the EVM | https://build.avax.network/academy/customizing-evm |
 
 ### Tutorials
 
 | Topic | URL |
 |-------|-----|
-| Deploy Smart Contract | https://build.avax.network/docs/dapps/smart-contracts/deploy-a-smart-contract |
-| Create an L1 | https://build.avax.network/docs/tooling/avalanche-cli/create-deploy-subnet |
+| Deploy Smart Contract | https://build.avax.network/docs/dapps/smart-contract-dev/deploy-with-remix-ide |
+| Create an L1 | https://build.avax.network/docs/tooling/avalanche-cli/create-avalanche-l1 |
+| Deploy L1 on Fuji | https://build.avax.network/docs/tooling/create-deploy-avalanche-l1s/deploy-on-fuji-testnet |
 | Set Up ICM | https://build.avax.network/docs/cross-chain/avalanche-warp-messaging/deep-dive |
 
 ---
@@ -265,7 +268,7 @@ npm install -D vitest @nomicfoundation/hardhat-toolbox
 | Channel | URL |
 |---------|-----|
 | Discord | https://discord.gg/avax |
-| Twitter | https://twitter.com/avaborateams |
+| Twitter/X | https://x.com/avax |
 | Telegram | https://t.me/avalancheavax |
 | Forum | https://forum.avax.network |
 
@@ -280,11 +283,11 @@ npm install -D vitest @nomicfoundation/hardhat-toolbox
 
 ## Grants & Ecosystem
 
-| Program | URL |
-|---------|-----|
-| Retro9000 | https://www.avax.network/retro9000 |
-| Avalanche Foundation | https://www.avalanchefoundation.org |
-| Codebase | https://codebase.avax.network |
+| Program | URL | Description |
+|---------|-----|-------------|
+| Retro9000 | https://grants.avax.network | $40M retroactive grants for L1 builders |
+| Avalanche Foundation | https://www.avax.network/about | Avalanche ecosystem foundation |
+| Codebase | https://codebase.avax.network | Accelerator program for builders |
 
 ---
 

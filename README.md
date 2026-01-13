@@ -105,7 +105,7 @@ foundryup
 ## Resources
 
 - [Avalanche Builder Hub](https://build.avax.network) - Official documentation
-- [Avalanche Academy](https://academy.avax.network) - Interactive courses
+- [Avalanche Academy](https://build.avax.network/academy) - Interactive courses
 - [Avalanche Discord](https://discord.gg/avax) - Community support
 
 ## Contributing
