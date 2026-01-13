@@ -41,6 +41,34 @@
 
 ---
 
+## BuilderKit: Ready-Made Components
+
+Before building from scratch, check [BuilderKit](https://github.com/ava-labs/builders-hub/tree/main/content/docs/builderkit) for production-ready React components.
+
+### What BuilderKit Provides
+
+| Component | Use Case |
+|-----------|----------|
+| **ICTT Bridge UI** | Token bridging interface between chains |
+| **Wallet Connection** | Connect button with multi-wallet support |
+| **Transaction Status** | Progress tracking and confirmations |
+| **Chain Selector** | Network switching dropdowns |
+| **Token Balance** | Display balances across chains |
+
+### Using BuilderKit
+
+```bash
+# Clone the components
+git clone https://github.com/ava-labs/builders-hub.git
+
+# Copy what you need to your project
+cp -r builders-hub/content/docs/builderkit/components ./src/components/builderkit
+```
+
+> **Recommendation**: Use BuilderKit components as your starting point, then customize styling and behavior to match your dApp's design.
+
+---
+
 ## Frontend Setup
 
 ### Provider Configuration

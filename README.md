@@ -17,14 +17,14 @@ A comprehensive Claude Code skill for Avalanche blockchain development. This ski
 ### Quick Install
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/avalanche-builder/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/ashucoder9/avalanche-builder/main/install.sh | bash
 ```
 
 ### Manual Install
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/avalanche-builder.git
+git clone https://github.com/ashucoder9/avalanche-builder.git
 ```
 
 2. Copy the skill directory to your Claude Code skills folder:

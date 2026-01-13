@@ -56,6 +56,21 @@
 | [avalanche-smart-contract-quickstart](https://github.com/ava-labs/avalanche-smart-contract-quickstart) | Smart contract starter template |
 | [hypersdk](https://github.com/ava-labs/hypersdk) | High-performance VM framework |
 
+### Frontend Components
+
+| Repository | Description |
+|------------|-------------|
+| [BuilderKit](https://github.com/ava-labs/builders-hub/tree/main/content/docs/builderkit) | **Ready-made React components** for Avalanche dApps |
+
+**BuilderKit** provides production-ready frontend components for common Avalanche use cases:
+- ICTT Bridge UI components
+- Wallet connection flows
+- Transaction status displays
+- Chain/network selectors
+- Token transfer interfaces
+
+Use these as a starting point for your dApp frontend instead of building from scratch.
+
 ---
 
 ## NPM Packages

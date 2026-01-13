@@ -463,6 +463,52 @@ Bridges deployed through AvaCloud automatically integrate with Core Bridge UI.
 
 ---
 
+## Frontend: BuilderKit Components
+
+For building bridge UIs, use [BuilderKit](https://github.com/ava-labs/builders-hub/tree/main/content/docs/builderkit) - ready-made React components for ICTT bridges.
+
+### Available Components
+
+BuilderKit provides production-ready components for:
+- **Bridge Interface** - Token selection, amount input, chain selectors
+- **Transfer Status** - Progress tracking, transaction confirmations
+- **Token Balances** - Display balances across chains
+- **Network Switcher** - Chain selection dropdowns
+
+### Quick Start
+
+```bash
+# Clone BuilderKit components
+git clone https://github.com/ava-labs/builders-hub.git
+cd builders-hub/content/docs/builderkit
+
+# Copy components to your project
+cp -r components/ your-project/src/components/builderkit/
+```
+
+### Example: Bridge Component
+
+```tsx
+// Use BuilderKit's bridge component as starting point
+import { BridgeInterface } from '@/components/builderkit/bridge'
+
+export function TokenBridge() {
+  return (
+    <BridgeInterface
+      sourceChain={sourceChainConfig}
+      destinationChain={destChainConfig}
+      tokenHomeAddress={tokenHome}
+      tokenRemoteAddress={tokenRemote}
+      onTransferComplete={(txHash) => console.log('Bridged:', txHash)}
+    />
+  )
+}
+```
+
+Using BuilderKit saves significant development time compared to building bridge UIs from scratch.
+
+---
+
 ## Security Considerations
 
 ### Collateralization
