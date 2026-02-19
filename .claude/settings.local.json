@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(bash)",
+      "Bash(chmod:*)",
+      "Bash(xargs:*)",
+      "WebSearch",
+      "WebFetch(domain:build.avax.network)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:academy.avax.network)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:developers.avacloud.io)",
+      "Bash(gh api:*)",
+      "Bash(python3:*)",
+      "Bash(pip3 list:*)",
+      "Bash(brew list:*)",
+      "Bash(pip3 install:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Bash(brew install:*)",
+      "Bash(git -C /Users/nicolas.arnedo/avalanche-builder remote -v)"
+    ]
+  }
+}
