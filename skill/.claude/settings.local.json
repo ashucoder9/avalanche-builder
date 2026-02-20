@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx dos-chain-diagnostics.ts)"
+    ]
+  }
+}

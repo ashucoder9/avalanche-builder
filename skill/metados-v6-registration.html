@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 2cm 2.5cm;
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 9px;
+      color: #666;
+    }
+    @bottom-left {
+      content: "Confidential — MetaDOS / Ava Labs";
+      font-size: 9px;
+      color: #666;
+    }
+  }
+
+  body {
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.55;
+    color: #1a1a1a;
+  }
+
+  h1 {
+    font-size: 22pt;
+    color: #e84142;
+    border-bottom: 3px solid #e84142;
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 15pt;
+    color: #232323;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-top: 28px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 12pt;
+    color: #444;
+    margin-top: 20px;
+    page-break-after: avoid;
+  }
+
+  .header-meta {
+    color: #666;
+    font-size: 10pt;
+    margin-bottom: 25px;
+  }
+
+  .header-meta table {
+    border: none;
+    margin: 0;
+  }
+
+  .header-meta td {
+    border: none;
+    padding: 2px 15px 2px 0;
+    font-size: 10pt;
+    background: none;
+  }
+
+  .header-meta td:first-child {
+    font-weight: 600;
+    color: #444;
+  }
+
+  .alert {
+    border-left: 4px solid;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+
+  .alert-danger {
+    border-color: #e84142;
+    background: #fef2f2;
+    color: #991b1b;
+  }
+
+  .alert-warning {
+    border-color: #f59e0b;
+    background: #fffbeb;
+    color: #92400e;
+  }
+
+  .alert-info {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #1e40af;
+  }
+
+  .alert-success {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+  }
+
+  .alert strong {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  pre {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-all;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 9pt;
+  }
+
+  p code, li code {
+    background: #f0f0f0;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9pt;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background: #f3f4f6;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+  }
+
+  td {
+    padding: 7px 10px;
+    border: 1px solid #d1d5db;
+  }
+
+  tr:nth-child(even) td {
+    background: #f9fafb;
+  }
+
+  .step-number {
+    display: inline-block;
+    background: #e84142;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    font-size: 12pt;
+    font-weight: 700;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .flow-diagram {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+    font-family: 'SF Mono', monospace;
+    font-size: 9pt;
+    line-height: 2;
+    page-break-inside: avoid;
+  }
+
+  .flow-diagram .arrow {
+    color: #e84142;
+    font-weight: bold;
+  }
+
+  ul, ol {
+    padding-left: 22px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist li::before {
+    content: "☐ ";
+    font-size: 12pt;
+  }
+
+  .divider {
+    border: none;
+    border-top: 2px solid #e84142;
+    margin: 30px 0;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .toc {
+    background: #f9fafb;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin: 20px 0;
+  }
+
+  .toc ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .toc li {
+    padding: 3px 0;
+  }
+
+  .toc a {
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-critical { background: #fee2e2; color: #991b1b; }
+  .tag-important { background: #fef3c7; color: #92400e; }
+  .tag-info { background: #dbeafe; color: #1e40af; }
+</style>
+</head>
+<body>
+
+<h1>DOS Chain &mdash; v6 Validator Registration<br><small style="font-size: 13pt; color: #666;">Off-Chain BLS Signing &amp; P-Chain Submission</small></h1>
+
+<div class="header-meta">
+<table>
+  <tr><td>Date</td><td>February 13, 2026</td></tr>
+  <tr><td>Chain</td><td>DOS Chain (Blockchain ID: <code>22v7AG7h6qaVxd4bLvAsSsg2LZ4RCn5iVYgFn7a2Fj1LCuYwjv</code>)</td></tr>
+  <tr><td>Subnet</td><td><code>nQCwF6V9y8VFjvMuPeQVWWYn6ba75518Dpf6ZMWZNb3NyTA94</code></td></tr>
+  <tr><td>Network</td><td>Avalanche Mainnet</td></tr>
+  <tr><td>Target Validator</td><td>v6 &mdash; <code>NodeID-Mu35k31HAXFbEp1SqJr1uUrue9nwqVFe6</code></td></tr>
+  <tr><td>Prepared by</td><td>Ava Labs Solutions Engineering</td></tr>
+</table>
+</div>
+
+<div class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li>1. Background &amp; Problem Statement</li>
+    <li>2. Pre-Check: Is v6 Already Registered?</li>
+    <li>3. Scenario A &mdash; Reactivate v6 (Balance Top-Up)</li>
+    <li>4. Scenario B &mdash; Register v6 (Off-Chain BLS Signing)</li>
+    <li>5. Go Script: Complete RegisterL1ValidatorTx Tool</li>
+    <li>6. Post-Registration: Warp Timestamp Fix</li>
+    <li>7. Verification &amp; Monitoring</li>
+    <li>Appendix A: Required Information Checklist</li>
+    <li>Appendix B: Security Considerations</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h2>1. Background &amp; Problem Statement</h2>
+
+<p>The DOS Chain is stuck at block <strong>2,273,699</strong>. All 4 validators (v0, v1, v2, v6) bootstrap successfully and enter consensus, but no new blocks are produced. Debug logs confirm:</p>
+
+<pre><code>DEBUG &lt;22v7AG7... Chain&gt; snowman/engine.go:631 processing block not found
+{"requestedHeight": 2273700, "lastAcceptedHeight": 2273699}</code></pre>
+
+<p>The root cause involves v6 not being active in the P-Chain validator set. Without v6, the remaining validators may not meet the <strong>67% weight threshold</strong> required for consensus, which prevents block production.</p>
+
+<h3>Why Normal Registration Doesn't Work</h3>
+
+<div class="flow-diagram">
+  <strong>Normal Flow (requires block production):</strong><br>
+  ValidatorManager.initializeValidatorRegistration() <span class="arrow">&rarr;</span> Warp message emitted on-chain <span class="arrow">&rarr;</span> Aggregator collects BLS signatures via P2P <span class="arrow">&rarr;</span> RegisterL1ValidatorTx on P-Chain
+</div>
+
+<p>Since the chain can't produce blocks, Step 1 can't execute. The <code>initializeValidatorRegistration()</code> transaction gets accepted into the mempool but never mined.</p>
+
+<h3>The Bypass: Off-Chain BLS Signing</h3>
+
+<div class="flow-diagram">
+  <strong>Off-Chain Flow (no block production needed):</strong><br>
+  Construct RegisterL1ValidatorMessage manually <span class="arrow">&rarr;</span> Sign with BLS private keys from v0, v1, v2 <span class="arrow">&rarr;</span> Aggregate signatures off-chain <span class="arrow">&rarr;</span> RegisterL1ValidatorTx on P-Chain
+</div>
+
+<p>The P-Chain only checks that the Warp message has valid BLS signatures from &ge;67% of the L1's validator weight. It does <strong>not</strong> verify the message originated from an on-chain transaction. We can construct and sign the message entirely off-chain using the validators' BLS private keys (<code>signer.key</code> files).</p>
+
+<!-- ============================================================ -->
+<hr class="divider">
+<h2>2. Pre-Check: Is v6 Already Registered?</h2>
+
+<div class="alert alert-warning">
+  <strong>Do this first!</strong>
+  If v6 is already registered but ran out of balance, the fix is a simple P-Chain transaction (Scenario A) and you can skip the complex off-chain signing entirely.
+</div>
+
+<p>Run this on any running validator:</p>
+
+<pre><code>curl -s -X POST --data '{
+  "jsonrpc":"2.0","id":1,
+  "method":"platform.getCurrentValidators",
+  "params":{"subnetID":"nQCwF6V9y8VFjvMuPeQVWWYn6ba75518Dpf6ZMWZNb3NyTA94"}
+}' -H 'content-type:application/json' http://127.0.0.1:9650/ext/bc/P | \
+  jq '.result.validators[] | {nodeID, weight, balance}'</code></pre>
+
+<p>Look for <code>NodeID-Mu35k31HAXFbEp1SqJr1uUrue9nwqVFe6</code> in the output.</p>
+
+<table>
+  <tr>
+    <th>Result</th>
+    <th>Meaning</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>v6 listed, <code>balance: 0</code></td>
+    <td>v6 ran out of AVAX and was disabled</td>
+    <td><strong>Scenario A</strong> &mdash; Simple balance top-up</td>
+  </tr>
+  <tr>
+    <td>v6 NOT listed at all</td>
+    <td>v6 was never registered post-conversion</td>
+    <td><strong>Scenario B</strong> &mdash; Off-chain signing &amp; registration</td>
+  </tr>
+  <tr>
+    <td>v6 listed, <code>balance &gt; 0</code></td>
+    <td>v6 is active; issue is elsewhere</td>
+    <td>Investigate further &mdash; contact Ava Labs</td>
+  </tr>
+</table>
+
+<div class="alert alert-info">
+  <strong>Also check ALL validators' balances.</strong>
+  If any of v0, v1, or v2 also have <code>balance: 0</code>, they are disabled too. ALL validators need positive balances to participate in consensus.
+</div>
+
+<!-- ============================================================ -->
+<hr class="divider">
+<h2>3. Scenario A &mdash; Reactivate v6 (Balance Top-Up)</h2>
+
+<p><span class="tag tag-info">SIMPLE FIX</span> If v6 is already registered but has <code>balance: 0</code>:</p>
+
+<p><code>IncreaseL1ValidatorBalanceTx</code> is a P-Chain-only transaction. No L1 block production is required.</p>
+
+<h3>Using avalanche-cli</h3>
+
+<pre><code># Install avalanche-cli (if not already installed)
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+
+# Fund v6 with 10 AVAX
+avalanche validator increaseBalance \
+  --node-id NodeID-Mu35k31HAXFbEp1SqJr1uUrue9nwqVFe6 \
+  --balance 10 \
+  --mainnet
+
+# Also check and fund v0, v1, v2 if their balances are low
+avalanche validator increaseBalance \
+  --node-id NodeID-3K3PUAqo3cKxRoQyYto1EsXtuTHoDZ2B6 \
+  --balance 10 --mainnet
+
+avalanche validator increaseBalance \
+  --node-id NodeID-Ma3Ztm2A48bCVjfiSmoZS5MKNzKVTRN7j \
+  --balance 10 --mainnet
+
+avalanche validator increaseBalance \
+  --node-id NodeID-G8yv8mWQy8FLdFfAhJ4v294T5Z2DWDVEH \
+  --balance 10 --mainnet</code></pre>
+
+<div class="alert alert-success">
+  <strong>Cost:</strong> ~1.33 AVAX/month per validator. 10 AVAX provides ~7.5 months of runway per validator.
+</div>
+
+<p>After funding, proceed to <strong>Section 6: Warp Timestamp Fix</strong>.</p>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2>4. Scenario B &mdash; Register v6 (Off-Chain BLS Signing)</h2>
+
+<p><span class="tag tag-critical">ADVANCED</span> Only needed if v6 is NOT in the P-Chain validator set at all.</p>
+
+<h3>4.1 Prerequisites</h3>
+
+<table>
+  <tr>
+    <th>Requirement</th>
+    <th>Details</th>
+  </tr>
+  <tr>
+    <td>Go 1.22+</td>
+    <td>Install from <code>https://go.dev/dl/</code></td>
+  </tr>
+  <tr>
+    <td>v6 BLS public key &amp; proof of possession</td>
+    <td>From <code>info.getNodeID</code> on v6</td>
+  </tr>
+  <tr>
+    <td><code>signer.key</code> files from v0, v1, v2</td>
+    <td>Located at <code>~/.avalanchego/staking/signer.key</code> on each validator</td>
+  </tr>
+  <tr>
+    <td>P-Chain funded key</td>
+    <td>At least 11 AVAX (10 deposit + 1 fees)</td>
+  </tr>
+  <tr>
+    <td>ValidatorManager proxy address</td>
+    <td>The contract address on the DOS chain</td>
+  </tr>
+  <tr>
+    <td>Network access</td>
+    <td>To a mainnet Avalanche node on port 9650</td>
+  </tr>
+</table>
+
+<h3>4.2 Gather Information</h3>
+
+<p><strong>A. Get v6's BLS credentials:</strong></p>
+
+<pre><code># Run on v6's machine
+curl -s -X POST --data '{
+  "jsonrpc":"2.0","id":1,
+  "method":"info.getNodeID"
+}' -H 'content-type:application/json' http://127.0.0.1:9650/ext/info | jq '.result'
+
+# Output includes:
+#   "nodeID": "NodeID-Mu35k31HAXFbEp1SqJr1uUrue9nwqVFe6"
+#   "nodePOP": {
+#     "publicKey": "0x...",           &lt;-- v6 BLS public key (48 bytes)
+#     "proofOfPossession": "0x..."    &lt;-- v6 BLS PoP (96 bytes)
+#   }</code></pre>
+
+<p><strong>B. Get canonical validator set ordering:</strong></p>
+
+<pre><code>curl -s -X POST --data '{
+  "jsonrpc":"2.0","id":1,
+  "method":"platform.getCurrentValidators",
+  "params":{"subnetID":"nQCwF6V9y8VFjvMuPeQVWWYn6ba75518Dpf6ZMWZNb3NyTA94"}
+}' -H 'content-type:application/json' http://127.0.0.1:9650/ext/bc/P | \
+  jq '.result.validators[] | {nodeID, weight}'</code></pre>
+
+<p><strong>C. Copy <code>signer.key</code> files securely:</strong></p>
+
+<pre><code># From each validator machine, copy to a secure working directory
+scp user@v0-host:~/.avalanchego/staking/signer.key ./keys/v0-signer.key
+scp user@v1-host:~/.avalanchego/staking/signer.key ./keys/v1-signer.key
+scp user@v2-host:~/.avalanchego/staking/signer.key ./keys/v2-signer.key</code></pre>
+
+<div class="alert alert-danger">
+  <strong>Security Warning:</strong>
+  <code>signer.key</code> files are the BLS private keys for each validator. They are critical secrets equivalent to validator identity. Transfer over SSH/SCP only. Delete all copies from the working machine after the registration is complete.
+</div>
+
+<h3>4.3 How It Works</h3>
+
+<p>The script performs these steps:</p>
+
+<ol>
+  <li><strong>Construct</strong> a <code>RegisterL1ValidatorMessage</code> with v6's details (NodeID, BLS public key, weight, expiry, balance/disable owners)</li>
+  <li><strong>Wrap</strong> it in an <code>AddressedCall</code> payload with the ValidatorManager address as the source</li>
+  <li><strong>Create</strong> an <code>UnsignedMessage</code> with the DOS Chain's blockchain ID and mainnet network ID</li>
+  <li><strong>Sign</strong> the unsigned message with BLS private keys from v0, v1, v2</li>
+  <li><strong>Aggregate</strong> the BLS signatures into a <code>BitSetSignature</code> with correct signer indices</li>
+  <li><strong>Submit</strong> <code>RegisterL1ValidatorTx</code> on the P-Chain with the signed warp message + v6's proof of possession + AVAX deposit</li>
+</ol>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2>5. Go Script: RegisterL1ValidatorTx Tool</h2>
+
+<h3>5.1 Project Setup</h3>
+
+<pre><code>mkdir dos-register-validator &amp;&amp; cd dos-register-validator
+mkdir keys</code></pre>
+
+<p>Create <code>go.mod</code>:</p>
+
+<pre><code>module dos-register-validator
+
+go 1.22
+
+require github.com/ava-labs/avalanchego v1.12.2</code></pre>
+
+<h3>5.2 main.go</h3>
+
+<p>Create <code>main.go</code> with the following content. Fill in the values marked with <code>&lt;-- FILL IN</code>.</p>
+
+<pre><code>package main
+
+import (
+	"context"
+	"encoding/hex"
+	"fmt"
+	"log"
+	"sort"
+	"time"
+
+	"github.com/ava-labs/avalanchego/ids"
+	"github.com/ava-labs/avalanchego/utils/constants"
+	"github.com/ava-labs/avalanchego/utils/crypto/bls"
+	"github.com/ava-labs/avalanchego/utils/crypto/bls/signer/localsigner"
+	"github.com/ava-labs/avalanchego/utils/set"
+	"github.com/ava-labs/avalanchego/utils/units"
+	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
+	warpmessage "github.com/ava-labs/avalanchego/vms/platformvm/warp/message"
+	warppayload "github.com/ava-labs/avalanchego/vms/platformvm/warp/payload"
+	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
+)
+
+func main() {
+	ctx := context.Background()
+
+	// ================================================================
+	// CONFIGURATION — FILL IN ALL VALUES BELOW
+	// ================================================================
+
+	networkID := constants.MainnetID // 1
+
+	blockchainID, _ := ids.FromString(
+		"22v7AG7h6qaVxd4bLvAsSsg2LZ4RCn5iVYgFn7a2Fj1LCuYwjv",
+	)
+	subnetID, _ := ids.FromString(
+		"nQCwF6V9y8VFjvMuPeQVWWYn6ba75518Dpf6ZMWZNb3NyTA94",
+	)
+
+	// ValidatorManager proxy contract address on the DOS chain
+	managerAddressHex := "0x..."  // &lt;-- FILL IN
+
+	// v6 details (from info.getNodeID on v6)
+	v6NodeIDStr      := "NodeID-Mu35k31HAXFbEp1SqJr1uUrue9nwqVFe6"
+	v6BLSPubKeyHex   := "..."    // &lt;-- FILL IN: nodePOP.publicKey
+	v6BLSPoPHex      := "..."    // &lt;-- FILL IN: nodePOP.proofOfPossession
+
+	// Weight for v6 (match existing validators)
+	v6Weight := uint64(20)       // &lt;-- FILL IN
+
+	// AVAX deposit for v6 on the P-Chain (10 AVAX = ~7.5 months)
+	depositBalance := 10 * units.Avax
+
+	// BLS private key files from the SIGNING validators (v0, v1, v2)
+	// Copy from ~/.avalanchego/staking/signer.key on each machine
+	signerKeyPaths := []string{
+		"./keys/v0-signer.key",
+		"./keys/v1-signer.key",
+		"./keys/v2-signer.key",
+	}
+
+	// Node IDs of the signing validators (SAME ORDER as key paths)
+	signerNodeIDs := []string{
+		"NodeID-3K3PUAqo3cKxRoQyYto1EsXtuTHoDZ2B6",
+		"NodeID-Ma3Ztm2A48bCVjfiSmoZS5MKNzKVTRN7j",
+		"NodeID-G8yv8mWQy8FLdFfAhJ4v294T5Z2DWDVEH",
+	}
+
+	// P-Chain private key (hex) — needs ~11 AVAX balance
+	pChainPrivKeyHex := "..."    // &lt;-- FILL IN
+
+	// Avalanche node RPC endpoint
+	nodeURI := "http://127.0.0.1:9650"
+
+	// P-Chain owner address (receives remaining deposit on removal)
+	ownerAddressHex := "..."     // &lt;-- FILL IN (20-byte short ID, hex)
+
+	// ================================================================
+	// END CONFIGURATION
+	// ================================================================
+
+	fmt.Println("=== DOS Chain v6 Validator Registration ===")
+	fmt.Println("    Off-Chain BLS Signing Approach")
+	fmt.Println()
+
+	// --- Parse v6 details ---
+	v6NodeID, err := ids.NodeIDFromString(v6NodeIDStr)
+	if err != nil {
+		log.Fatalf("Parse v6 NodeID: %v", err)
+	}
+
+	v6BLSPubKeyBytes, _ := hex.DecodeString(strip0x(v6BLSPubKeyHex))
+	var v6BLSPubKey [bls.PublicKeyLen]byte
+	copy(v6BLSPubKey[:], v6BLSPubKeyBytes)
+
+	v6BLSPoPBytes, _ := hex.DecodeString(strip0x(v6BLSPoPHex))
+	var v6PoP [bls.SignatureLen]byte
+	copy(v6PoP[:], v6BLSPoPBytes)
+
+	managerAddr, _ := hex.DecodeString(strip0x(managerAddressHex))
+
+	ownerAddrBytes, _ := hex.DecodeString(strip0x(ownerAddressHex))
+	var ownerAddr ids.ShortID
+	copy(ownerAddr[:], ownerAddrBytes)
+
+	balanceOwner := warpmessage.PChainOwner{
+		Threshold: 1,
+		Addresses: []ids.ShortID{ownerAddr},
+	}
+	disableOwner := warpmessage.PChainOwner{
+		Threshold: 1,
+		Addresses: []ids.ShortID{ownerAddr},
+	}
+
+	expiry := uint64(time.Now().Add(24 * time.Hour).Unix())
+
+	// ================================================================
+	// STEP 1: Construct RegisterL1Validator message
+	// ================================================================
+	fmt.Println("[1/5] Constructing RegisterL1Validator message...")
+
+	registerMsg, err := warpmessage.NewRegisterL1Validator(
+		subnetID, v6NodeID, v6BLSPubKey,
+		expiry, balanceOwner, disableOwner, v6Weight,
+	)
+	if err != nil {
+		log.Fatalf("Create message: %v", err)
+	}
+
+	validationID := registerMsg.ValidationID()
+	fmt.Printf("      ValidationID: %s\n", validationID)
+	fmt.Printf("      Expiry:       %s\n",
+		time.Unix(int64(expiry), 0).UTC().Format(time.RFC3339))
+
+	// Wrap in AddressedCall
+	addrCall, err := warppayload.NewAddressedCall(
+		managerAddr, registerMsg.Bytes(),
+	)
+	if err != nil {
+		log.Fatalf("Create AddressedCall: %v", err)
+	}
+
+	// Create unsigned warp message
+	unsignedWarp, err := warp.NewUnsignedMessage(
+		networkID, blockchainID, addrCall.Bytes(),
+	)
+	if err != nil {
+		log.Fatalf("Create unsigned warp: %v", err)
+	}
+
+	fmt.Printf("      Warp msg hash: %s\n", unsignedWarp.ID())
+
+	// ================================================================
+	// STEP 2: Determine canonical validator ordering
+	// ================================================================
+	fmt.Println("\n[2/5] Determining canonical validator ordering...")
+
+	var allNodeIDs []ids.NodeID
+	for _, nidStr := range signerNodeIDs {
+		nid, _ := ids.NodeIDFromString(nidStr)
+		allNodeIDs = append(allNodeIDs, nid)
+	}
+
+	// Sort by NodeID bytes (canonical P-Chain ordering)
+	sort.Slice(allNodeIDs, func(i, j int) bool {
+		return allNodeIDs[i].Compare(allNodeIDs[j]) &lt; 0
+	})
+
+	nodeIDToIndex := make(map[ids.NodeID]int)
+	for i, nid := range allNodeIDs {
+		fmt.Printf("      [%d] %s\n", i, nid)
+		nodeIDToIndex[nid] = i
+	}
+
+	// ================================================================
+	// STEP 3: Load BLS keys and sign the warp message
+	// ================================================================
+	fmt.Println("\n[3/5] Loading BLS keys and signing...")
+
+	signerBits := set.NewBits()
+	var blsSigs []*bls.Signature
+
+	for i, keyPath := range signerKeyPaths {
+		sk, err := localsigner.FromFile(keyPath)
+		if err != nil {
+			log.Fatalf("Load key %s: %v", keyPath, err)
+		}
+
+		nid, _ := ids.NodeIDFromString(signerNodeIDs[i])
+		idx := nodeIDToIndex[nid]
+
+		sig, err := sk.Sign(unsignedWarp.Bytes())
+		if err != nil {
+			log.Fatalf("Sign with %s: %v", keyPath, err)
+		}
+
+		signerBits.Add(idx)
+		blsSigs = append(blsSigs, sig)
+		fmt.Printf("      Signed: %s (index %d)\n", signerNodeIDs[i], idx)
+	}
+
+	// ================================================================
+	// STEP 4: Aggregate signatures
+	// ================================================================
+	fmt.Println("\n[4/5] Aggregating BLS signatures...")
+
+	aggSig, err := bls.AggregateSignatures(blsSigs)
+	if err != nil {
+		log.Fatalf("Aggregate: %v", err)
+	}
+
+	var aggSigBytes [bls.SignatureLen]byte
+	copy(aggSigBytes[:], bls.SignatureToBytes(aggSig))
+
+	signedWarp, err := warp.NewMessage(
+		unsignedWarp,
+		&amp;warp.BitSetSignature{
+			Signers:   signerBits.Bytes(),
+			Signature: aggSigBytes,
+		},
+	)
+	if err != nil {
+		log.Fatalf("Create signed warp: %v", err)
+	}
+
+	fmt.Printf("      Signed message: %d bytes\n", len(signedWarp.Bytes()))
+
+	// ================================================================
+	// STEP 5: Submit RegisterL1ValidatorTx on P-Chain
+	// ================================================================
+	fmt.Println("\n[5/5] Submitting RegisterL1ValidatorTx on P-Chain...")
+
+	pKeyBytes, _ := hex.DecodeString(strip0x(pChainPrivKeyHex))
+	kc := primary.NewKeychain(pKeyBytes...)
+	wallet, err := primary.MakePWallet(
+		ctx, nodeURI, kc,
+		primary.WalletConfig{SubnetIDs: []ids.ID{subnetID}},
+	)
+	if err != nil {
+		log.Fatalf("Create wallet: %v", err)
+	}
+
+	tx, err := wallet.IssueRegisterL1ValidatorTx(
+		depositBalance, v6PoP, signedWarp.Bytes(),
+	)
+	if err != nil {
+		log.Fatalf("Issue tx: %v", err)
+	}
+
+	fmt.Println("\n========================================")
+	fmt.Println("  SUCCESS")
+	fmt.Println("========================================")
+	fmt.Printf("  TX ID:         %s\n", tx.ID())
+	fmt.Printf("  ValidationID:  %s\n", validationID)
+	fmt.Printf("  Deposit:       %.2f AVAX\n",
+		float64(depositBalance)/float64(units.Avax))
+	fmt.Println("\n  v6 is now registered on the P-Chain.")
+	fmt.Println("  Proceed to Section 6: Warp Timestamp Fix.")
+}
+
+func strip0x(s string) string {
+	if len(s) >= 2 &amp;&amp; s[:2] == "0x" {
+		return s[2:]
+	}
+	return s
+}</code></pre>
+
+<h3>5.3 Build &amp; Run</h3>
+
+<pre><code># Initialize and download dependencies
+go mod tidy
+
+# Build
+go build -o register-v6 .
+
+# Run (ensure signer.key files are in ./keys/ and config is filled in)
+./register-v6</code></pre>
+
+<div class="alert alert-warning">
+  <strong>Expiry window:</strong> The script sets a 24-hour expiry on the registration message. You must run the script and have the P-Chain transaction confirmed within 24 hours. If it expires, simply re-run the script.
+</div>
+
+<div class="alert alert-info">
+  <strong>Note on validator ordering:</strong> The script sorts the signing validators by NodeID bytes to determine canonical indices. If there are additional validators registered on the P-Chain beyond v0, v1, v2 (even if disabled), they must be included in the ordering. Run the <code>platform.getCurrentValidators</code> command in Section 2 and verify the validator list matches exactly.
+</div>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2>6. Post-Registration: Warp Timestamp Fix</h2>
+
+<p><span class="tag tag-critical">REQUIRED</span> After v6 is registered on the P-Chain, block production still won't resume until the warp timestamp configuration is corrected on all 4 validators.</p>
+
+<h3>The Problem</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Current Value</th>
+    <th>Required Value</th>
+  </tr>
+  <tr>
+    <td>Last block timestamp</td>
+    <td>~1735776000 (Jan 1, 2026 11:59 UTC)</td>
+    <td>&mdash;</td>
+  </tr>
+  <tr>
+    <td>Warp activation timestamp</td>
+    <td>1767225600 (Jan 31, 2026) <span class="tag tag-critical">WRONG</span></td>
+    <td>1735689600 (Jan 1, 2026 00:00 UTC) <span class="tag tag-info">BEFORE last block</span></td>
+  </tr>
+</table>
+
+<h3>Fix: Apply to ALL 4 Validators</h3>
+
+<pre><code>CHAIN_ID="22v7AG7h6qaVxd4bLvAsSsg2LZ4RCn5iVYgFn7a2Fj1LCuYwjv"
+CONFIG_DIR="$HOME/.avalanchego/configs/chains/$CHAIN_ID"
+
+mkdir -p "$CONFIG_DIR"
+
+# Backup existing configs
+cp "$CONFIG_DIR/config.json" "$CONFIG_DIR/config.json.backup" 2>/dev/null
+cp "$CONFIG_DIR/upgrade.json" "$CONFIG_DIR/upgrade.json.backup" 2>/dev/null
+
+# Fix 1: Warp timestamp (MUST be before last block timestamp)
+cat > "$CONFIG_DIR/upgrade.json" &lt;&lt; 'EOF'
+{
+  "precompileUpgrades": [
+    {
+      "warpConfig": {
+        "blockTimestamp": 1735689600
+      }
+    }
+  ]
+}
+EOF
+
+# Fix 2: ProposerVM config
+cat > "$CONFIG_DIR/config.json" &lt;&lt; 'EOF'
+{
+  "proposervm-block-delay-min": "100ms",
+  "proposervm-block-delay-max": "5s",
+  "proposer-min-block-delay": 0,
+  "proposer-num-historical-blocks": 512,
+  "state-sync-enabled": true,
+  "pruning-enabled": true
+}
+EOF
+
+echo "Config applied for $CHAIN_ID"</code></pre>
+
+<h3>Sequential Restart</h3>
+
+<div class="alert alert-danger">
+  <strong>CRITICAL: Never restart all validators at once.</strong>
+  Restart one at a time with 2-minute gaps. Wait for each to become healthy before restarting the next.
+</div>
+
+<pre><code># Restart order: v0 → v1 → v2 → v6
+# For each validator:
+
+sudo systemctl restart avalanchego
+
+# Wait 30 seconds, then verify health
+sleep 30
+curl -s -X POST --data '{"jsonrpc":"2.0","id":1,"method":"health.health"}' \
+  -H 'content-type:application/json' http://127.0.0.1:9650/ext/health | jq '.result.healthy'
+
+# Verify peer count (should be >= 2)
+curl -s -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.peers"}' \
+  -H 'content-type:application/json' http://127.0.0.1:9650/ext/info | jq '.result.numPeers'
+
+# Wait until healthy=true and peers>=2, then move to next validator</code></pre>
+
+<!-- ============================================================ -->
+<h2>7. Verification &amp; Monitoring</h2>
+
+<h3>Verify Block Production</h3>
+
+<pre><code>CHAIN_ID="22v7AG7h6qaVxd4bLvAsSsg2LZ4RCn5iVYgFn7a2Fj1LCuYwjv"
+
+# Check current block height
+BLOCK=$(curl -s -X POST --data '{"jsonrpc":"2.0","id":1,"method":"eth_blockNumber"}' \
+  -H 'content-type:application/json' \
+  http://127.0.0.1:9650/ext/bc/$CHAIN_ID/rpc | jq -r '.result')
+echo "Current block: $((16#${BLOCK:2}))"
+
+# Wait 30 seconds and check again — block number should increase
+sleep 30
+BLOCK2=$(curl -s -X POST --data '{"jsonrpc":"2.0","id":1,"method":"eth_blockNumber"}' \
+  -H 'content-type:application/json' \
+  http://127.0.0.1:9650/ext/bc/$CHAIN_ID/rpc | jq -r '.result')
+echo "Block after 30s: $((16#${BLOCK2:2}))"</code></pre>
+
+<h3>Verify Pending Transaction</h3>
+
+<pre><code># Check if the test transaction from Feb 9 was mined
+curl -s -X POST --data '{
+  "jsonrpc":"2.0","id":1,"method":"eth_getTransactionByHash",
+  "params":["0xf64ff6a29087ef8a17694238d6e3e58cfd58383863d45746139cd274306138d2"]
+}' -H 'content-type:application/json' \
+  http://127.0.0.1:9650/ext/bc/$CHAIN_ID/rpc | jq '.result.blockNumber'
+
+# If it returns a hex block number (not null), blocks are producing</code></pre>
+
+<h3>If Blocks Still Don't Produce After 5 Minutes</h3>
+
+<p>Database resync may be needed. Do <strong>one validator at a time</strong>:</p>
+
+<pre><code>CHAIN_ID="22v7AG7h6qaVxd4bLvAsSsg2LZ4RCn5iVYgFn7a2Fj1LCuYwjv"
+
+# 1. Stop the validator
+sudo systemctl stop avalanchego
+
+# 2. BACKUP staking keys (CRITICAL — do not skip)
+cp -r ~/.avalanchego/staking /tmp/staking-backup-$(date +%s)
+
+# 3. Delete only the DOS chain database
+find ~/.avalanchego/db -name "*$CHAIN_ID*" -type d -exec rm -rf {} + 2>/dev/null
+
+# 4. Restart (will resync from other validators)
+sudo systemctl start avalanchego
+
+# 5. Monitor sync progress (15-60 minutes)
+watch -n 10 'curl -s -X POST --data "{\"jsonrpc\":\"2.0\",\"id\":1, \
+  \"method\":\"info.isBootstrapped\",\"params\":{\"chain\":\"'$CHAIN_ID'\"}}" \
+  -H "content-type:application/json" http://127.0.0.1:9650/ext/info | jq'</code></pre>
+
+<!-- ============================================================ -->
+<div class="page-break"></div>
+<h2>Appendix A: Required Information Checklist</h2>
+
+<p>Before proceeding with Scenario B, collect and confirm all of the following:</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Item</th>
+    <th>Source</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>v6 BLS Public Key</td>
+    <td><code>info.getNodeID</code> on v6</td>
+    <td><em>to be filled</em></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>v6 BLS Proof of Possession</td>
+    <td><code>info.getNodeID</code> on v6</td>
+    <td><em>to be filled</em></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>ValidatorManager proxy address</td>
+    <td>DOS chain deployment records</td>
+    <td><em>to be filled</em></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>v0 <code>signer.key</code></td>
+    <td><code>~/.avalanchego/staking/signer.key</code> on v0</td>
+    <td><em>secure transfer</em></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>v1 <code>signer.key</code></td>
+    <td><code>~/.avalanchego/staking/signer.key</code> on v1</td>
+    <td><em>secure transfer</em></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>v2 <code>signer.key</code></td>
+    <td><code>~/.avalanchego/staking/signer.key</code> on v2</td>
+    <td><em>secure transfer</em></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>P-Chain private key (hex)</td>
+    <td>Team's key with &ge;11 AVAX on P-Chain</td>
+    <td><em>secure handling</em></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>P-Chain owner address</td>
+    <td>For remaining balance &amp; disable rights</td>
+    <td><em>to be filled</em></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>v6 desired weight</td>
+    <td>Should match other validators</td>
+    <td><em>to be filled</em></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>Full <code>getCurrentValidators</code> output</td>
+    <td>For canonical ordering verification</td>
+    <td><em>to be provided</em></td>
+  </tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>Appendix B: Security Considerations</h2>
+
+<ul>
+  <li><strong>BLS Private Keys (<code>signer.key</code>):</strong> These are the most sensitive artifacts. They prove validator identity and can sign arbitrary warp messages. Transfer only via SSH/SCP. Delete all copies from the working machine immediately after the registration transaction is confirmed.</li>
+  <li><strong>P-Chain Private Key:</strong> The hex private key used for submitting the P-Chain transaction should be treated as a hot wallet key. Only load the minimum AVAX needed (~11 AVAX).</li>
+  <li><strong>Do NOT commit keys to git.</strong> Add <code>keys/</code> to <code>.gitignore</code> before starting.</li>
+  <li><strong>Expiry:</strong> The registration message has a 24-hour expiry. If the transaction is not submitted in time, the message becomes invalid. Re-run the script to generate a new one.</li>
+  <li><strong>Weight:</strong> Setting an incorrect weight can affect consensus thresholds. Match existing validator weights unless intentionally rebalancing.</li>
+</ul>
+
+<!-- ============================================================ -->
+<hr class="divider">
+
+<h2>Action Plan Summary</h2>
+
+<table>
+  <tr>
+    <th>Priority</th>
+    <th>Action</th>
+    <th>When</th>
+  </tr>
+  <tr>
+    <td><span class="tag tag-critical">NOW</span></td>
+    <td>Run <code>getCurrentValidators</code> to check v6 status</td>
+    <td>Immediately</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-critical">1</span></td>
+    <td>Scenario A (balance top-up) OR Scenario B (off-chain registration)</td>
+    <td>Based on pre-check result</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-important">2</span></td>
+    <td>Fix warp timestamp config on all 4 validators</td>
+    <td>After v6 is active on P-Chain</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-important">3</span></td>
+    <td>Sequential restart (one at a time, 2-min gaps)</td>
+    <td>After config fix applied</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-info">4</span></td>
+    <td>Verify block production</td>
+    <td>After all restarts</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-info">5</span></td>
+    <td>Database resync (if needed, one at a time)</td>
+    <td>Only if step 4 fails after 5 min</td>
+  </tr>
+</table>
+
+<p style="margin-top: 30px; color: #666; font-size: 9pt; text-align: center;">
+  &mdash; End of Document &mdash;<br>
+  For questions, contact Ava Labs Solutions Engineering.
+</p>
+
+</body>
+</html>
